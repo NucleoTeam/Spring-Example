@@ -1,0 +1,25 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.M1'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.nucleomesh.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'http://nexus.synload.com/repository/releases/' }
+}
+
+dependencies {
+	compile("com.synload.nucleo:nucleocore:1.01"){
+		exclude module: "slf4j-nop"
+	}
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
