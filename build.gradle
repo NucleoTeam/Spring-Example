@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.nucleomesh.spring'
+group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	compile("com.synload.nucleo:nucleocore:1.02.01"){
+	compile("com.synload.nucleo:nucleocore:1.02.07"){
 		exclude module: "slf4j-nop"
 	}
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'

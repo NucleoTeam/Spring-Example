@@ -28,7 +28,7 @@ public class RootPage {
     meshService.getMesh().call("information.hits", data, new NucleoResponder(){
       @Override
       public void run(NucleoData data) {
-        result.setResult(ResponseEntity.ok((String)data.getObjects().get("wow")));
+        result.setResult(ResponseEntity.ok(data.getObjects()));
       }
     });
     return result;
@@ -42,6 +42,19 @@ public class RootPage {
       @Override
       public void run(NucleoData data) {
         result.setResult(ResponseEntity.ok((String)data.getObjects().get("wow")));
+      }
+    });
+    return result;
+  }
+  @GetMapping("/chain")
+  public DeferredResult<ResponseEntity<?>> chainBreak(){
+    TreeMap<String, Object> data = new TreeMap<String, Object>();
+    data.put("stop", "chain");
+    DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
+    meshService.getMesh().call("information.changeme", data, new NucleoResponder(){
+      @Override
+      public void run(NucleoData data) {
+        result.setResult(ResponseEntity.ok(data));
       }
     });
     return result;

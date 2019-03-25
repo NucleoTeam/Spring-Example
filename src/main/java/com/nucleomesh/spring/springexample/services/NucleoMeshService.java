@@ -13,7 +13,7 @@ public class NucleoMeshService {
   public void init() {
     this.mesh = new NucleoMesh(
       "module.1",
-      "192.168.1.225:9092",
+      "192.168.1.122:9092",
       "spring.example"
     );
     while(mesh.getHub().isReady()) {
