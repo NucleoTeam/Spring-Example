@@ -66,7 +66,7 @@ public class RootPage {
     data.put("username", user);
     data.put("password", "");
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(new String[]{"user.login",git a "session.create"}, data, new NucleoResponder(){
+    meshService.getMesh().call(new String[]{"user.login", "session.create"}, data, new NucleoResponder(){
       @Override
       public void run(NucleoData data) {
         result.setResult(ResponseEntity.ok(data));
