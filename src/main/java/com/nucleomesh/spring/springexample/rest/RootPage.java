@@ -31,7 +31,7 @@ public class RootPage {
     meshService.getMesh().call("information.hits", data, new NucleoResponder(){
       @Override
       public void run(NucleoData data) {
-        result.setResult(ResponseEntity.ok(data.getObjects()));
+        result.setResult(ResponseEntity.ok(data));
       }
     });
     return result;
@@ -44,7 +44,7 @@ public class RootPage {
     meshService.getMesh().call("information.changeme", data, new NucleoResponder(){
       @Override
       public void run(NucleoData data) {
-        result.setResult(ResponseEntity.ok((String)data.getObjects().get("wow")));
+        result.setResult(ResponseEntity.ok(data));
       }
     });
     return result;
