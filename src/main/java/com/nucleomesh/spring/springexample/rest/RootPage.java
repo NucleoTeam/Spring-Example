@@ -65,14 +65,14 @@ public class RootPage {
     return result;
   }
   @GetMapping("/request")
-  public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String[] chains,
+  public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String chains,
                                                    @RequestParam("objects") String objects,
                                                       HttpServletRequest request,
                                                       HttpServletResponse response) {
     try {
       TreeMap<String, Object> data = new ObjectMapper().readValue( objects, TreeMap.class);
       DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-      meshService.getMesh().call(chains, data, new NucleoResponder(){
+      meshService.getMesh().call(chains.split(","), data, new NucleoResponder(){
         @Override
         public void run(NucleoData data) {
           result.setResult(ResponseEntity.ok(data));
