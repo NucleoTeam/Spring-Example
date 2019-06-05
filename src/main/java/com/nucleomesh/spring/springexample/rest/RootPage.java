@@ -1,5 +1,7 @@
 package com.nucleomesh.spring.springexample.rest;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nucleomesh.spring.springexample.services.NucleoMeshService;
 import com.nucleomesh.spring.springexample.utils.InitialData;
 import com.synload.nucleo.event.NucleoData;
@@ -61,6 +63,26 @@ public class RootPage {
       }
     });
     return result;
+  }
+  @GetMapping("/request")
+  public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String[] chains,
+                                                   @RequestParam("objects") String objects,
+                                                      HttpServletRequest request,
+                                                      HttpServletResponse response) {
+    try {
+      TreeMap<String, Object> data = new ObjectMapper().readValue( objects, TreeMap.class);
+      DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
+      meshService.getMesh().call(chains, data, new NucleoResponder(){
+        @Override
+        public void run(NucleoData data) {
+          result.setResult(ResponseEntity.ok(data));
+        }
+      });
+      return result;
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
   }
   @ExceptionHandler({Exception.class})
   public Object handleErrors() {
