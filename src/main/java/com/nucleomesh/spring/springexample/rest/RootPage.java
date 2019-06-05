@@ -64,7 +64,7 @@ public class RootPage {
     });
     return result;
   }
-  @GetMapping("/request")
+  @PostMapping("/request")
   public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String chains,
                                                    @RequestParam("objects") String objects,
                                                       HttpServletRequest request,
