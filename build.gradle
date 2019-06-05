@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	compile("com.synload.nucleo:nucleocore:1.02.23"){
+	compile("com.synload.nucleo:nucleocore:1.02.24"){
 		exclude module: "slf4j-nop"
 	}
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'

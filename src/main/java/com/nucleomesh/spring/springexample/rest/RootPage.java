@@ -64,20 +64,26 @@ public class RootPage {
     });
     return result;
   }
-  @PostMapping("/request")
+  @PostMapping("/req")
   public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String chains,
                                                    @RequestParam("objects") String objects,
                                                       HttpServletRequest request,
-                                                      HttpServletResponse response) throws Exception{
-    TreeMap<String, Object> data = new ObjectMapper().readValue( objects, TreeMap.class);
-    DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(chains.split(","), data, new NucleoResponder(){
-      @Override
-      public void run(NucleoData data) {
-        result.setResult(ResponseEntity.ok(data));
-      }
-    });
-    return result;
+                                                      HttpServletResponse response){
+
+    try {
+      TreeMap<String, Object> data = (TreeMap<String, Object>) new ObjectMapper().readValue(objects, TreeMap.class);
+      DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
+      meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
+        @Override
+        public void run(NucleoData data) {
+          result.setResult(ResponseEntity.ok(data));
+        }
+      });
+      return result;
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
   }
   @ExceptionHandler({Exception.class})
   public Object handleErrors() {

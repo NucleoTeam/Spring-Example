@@ -12,7 +12,7 @@ public class NucleoMeshService {
   @PostConstruct
   public void init() {
     this.mesh = new NucleoMesh(
-      "module.1",
+      "module.2",
       "192.168.1.112:9092",
       "spring.example"
     );
