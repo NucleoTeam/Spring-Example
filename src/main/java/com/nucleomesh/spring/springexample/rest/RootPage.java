@@ -67,11 +67,11 @@ public class RootPage {
   @PostMapping("/req")
   public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String chains,
                                                    @RequestParam("objects") String objects,
-                                                      HttpServletRequest request,
-                                                      HttpServletResponse response){
-
+                                                   HttpServletRequest request,
+                                                   HttpServletResponse response){
+    TreeMap<String, Object> data = (TreeMap<String, Object>) request.getAttribute("data");
     try {
-      TreeMap<String, Object> data = (TreeMap<String, Object>) new ObjectMapper().readValue(objects, TreeMap.class);
+      data.putAll(new ObjectMapper().readValue(objects, TreeMap.class));
       DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
       meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
         @Override
