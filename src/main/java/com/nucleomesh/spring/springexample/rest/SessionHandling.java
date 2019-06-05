@@ -49,7 +49,7 @@ public class SessionHandling {
                                                   HttpServletResponse response) {
     TreeMap<String, Object> data = (TreeMap<String, Object>) request.getAttribute("data");
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(new String[]{"session.verify.destroy"}, data, new NucleoResponder() {
+    meshService.getMesh().call(new String[]{"session.verify","session.destroy"}, data, new NucleoResponder() {
       @Override
       public void run(NucleoData data) {
         if (!data.getObjects().containsKey("session")) {
