@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.UUID;
 
 @Service
 public class NucleoMeshService {
@@ -12,7 +13,7 @@ public class NucleoMeshService {
   @PostConstruct
   public void init() {
     this.mesh = new NucleoMesh(
-      "module.2",
+      "module."+ UUID.randomUUID().toString(),
       "192.168.1.112:9092",
       "spring.example"
     );
