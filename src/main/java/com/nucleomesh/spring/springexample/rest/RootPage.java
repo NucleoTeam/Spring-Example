@@ -72,6 +72,8 @@ public class RootPage {
     TreeMap<String, Object> data = (TreeMap<String, Object>) request.getAttribute("data");
     try {
       data.putAll(new ObjectMapper().readValue(objects, TreeMap.class));
+
+      chains = "get_session,admin,"+chains;
       DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
       meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
         @Override

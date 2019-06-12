@@ -32,7 +32,7 @@ public class SessionHandling {
     data.put("username", username);
     data.put("password", password);
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(new String[]{"user.login", "create_session"}, data, new NucleoResponder() {
+    meshService.getMesh().call(new String[]{"auth_user", "create_session"}, data, new NucleoResponder() {
       @Override
       public void run(NucleoData data) {
         if (data.getObjects().containsKey("session")) {
