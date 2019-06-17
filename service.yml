@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mcbprod
+  name: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      namespace: mcbprod
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image:  registry.synload.com:2005/mcbans-api:$BUILD_NUMBER
+          env:
+            - name: KAFKA_BROKER
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: host.txt
+            - name: db_password
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: password.txt
