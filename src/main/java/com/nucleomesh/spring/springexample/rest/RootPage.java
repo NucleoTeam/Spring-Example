@@ -73,7 +73,7 @@ public class RootPage {
     try {
       data.putAll(new ObjectMapper().readValue(objects, TreeMap.class));
 
-      chains = "get_session,admin,"+chains;
+      chains = "session.get.continue,permission.admin,"+chains;
       DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
       meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
         @Override

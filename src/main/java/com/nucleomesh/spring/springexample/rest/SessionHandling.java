@@ -32,7 +32,7 @@ public class SessionHandling {
     data.put("username", username);
     data.put("password", password);
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(new String[]{"auth_user", "create_session"}, data, new NucleoResponder() {
+    meshService.getMesh().call(new String[]{"user.auth", "session.create"}, data, new NucleoResponder() {
       @Override
       public void run(NucleoData data) {
         if (data.getObjects().containsKey("session")) {
@@ -49,7 +49,7 @@ public class SessionHandling {
                                                   HttpServletResponse response) {
     TreeMap<String, Object> data = (TreeMap<String, Object>) request.getAttribute("data");
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call(new String[]{"get_session.destroy"}, data, new NucleoResponder() {
+    meshService.getMesh().call(new String[]{"session.get.continue", "session.destroy"}, data, new NucleoResponder() {
       @Override
       public void run(NucleoData data) {
         if (!data.getObjects().containsKey("session")) {
