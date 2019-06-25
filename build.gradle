@@ -9,7 +9,7 @@ group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
-String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.07"
+String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.09"
 
 repositories {
 	mavenCentral()
@@ -19,9 +19,7 @@ repositories {
 }
 
 dependencies {
-	compile("com.synload.nucleo:nucleocore:${nucleo}"){
-		exclude module: "slf4j-nop"
-	}
+	compile("com.synload.nucleo:nucleocore:${nucleo}")
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -15,7 +15,9 @@ public class NucleoMeshService {
     this.mesh = new NucleoMesh(
       "module."+ UUID.randomUUID().toString(),
       "192.168.1.112:9092",
-      "spring.example"
+      "spring.example",
+      "192.168.1.112",
+      9200
     );
     while(mesh.getHub().isReady()) {
       try {
