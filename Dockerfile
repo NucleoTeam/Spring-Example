@@ -1,4 +1,4 @@
-FROM openjdk:13-jdk-oracle
+FROM openjdk:11-jdk
 RUN apt install -y unzip
 COPY build/distributions/*.zip /app.zip
 RUN unzip app.zip
