@@ -1,15 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.M1'
 	id 'java'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
-String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.15"
+String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.20"
 
 repositories {
 	mavenCentral()
@@ -20,6 +17,6 @@ repositories {
 
 dependencies {
 	compile("com.synload.nucleo:nucleocore:${nucleo}")
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest:2.2.0.M1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.0.M1'
 }
