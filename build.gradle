@@ -9,7 +9,7 @@ group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
-String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.15"
+String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.03.23"
 
 repositories {
 	mavenCentral()

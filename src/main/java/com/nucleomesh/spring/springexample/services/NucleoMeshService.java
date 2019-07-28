@@ -13,19 +13,13 @@ public class NucleoMeshService {
   @PostConstruct
   public void init() {
     this.mesh = new NucleoMesh(
-      "module."+ UUID.randomUUID().toString(),
-      "192.168.1.112:9092",
-      "spring.example",
-      "192.168.1.112",
+      "mcbans",
+      "api",
+      "192.168.1.29:2181",
+      "192.168.1.29",
       9200
     );
-    while(mesh.getHub().isReady()) {
-      try {
-        Thread.sleep(1L);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
+    this.getMesh().start();
     this.mesh.getHub().run();
   }
   public NucleoMesh getMesh(){
