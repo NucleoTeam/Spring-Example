@@ -20,7 +20,6 @@ public class NucleoMeshService {
       9200
     );
     this.getMesh().start();
-    this.mesh.getHub().run();
   }
   public NucleoMesh getMesh(){
     return mesh;
