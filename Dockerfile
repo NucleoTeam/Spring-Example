@@ -1,6 +1,6 @@
-FROM openjdk:13-jdk-oracle
-VOLUME /tmp
-COPY build/libs/*.jar /app.jar
-RUN sh -c 'touch /app.jar'
-EXPOSE 8080
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+FROM openjdk:11-jdk
+RUN apt install -y unzip
+COPY build/distributions/*.zip /app.zip
+RUN unzip app.zip
+RUN cp -R spring-example-0.0.1-SNAPSHOT/* /
+ENTRYPOINT /bin/sh -c ./bin/spring-example

@@ -1,9 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.M1'
 	id 'java'
+	id 'application'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
@@ -20,6 +18,16 @@ repositories {
 
 dependencies {
 	compile("com.synload.nucleo:nucleocore:${nucleo}")
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest:2.2.0.M1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.0.M1'
 }
+ext.sharedManifest = manifest {
+	attributes("Implementation-Title": "Gradle",
+			"Implementation-Version": version)
+}
+task fooJar(type: Jar) {
+	manifest = project.manifest {
+		from sharedManifest
+	}
+}
+mainClassName = 'com.nucleomesh.spring.springexample.SpringExampleApplication'

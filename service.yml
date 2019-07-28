@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image:  registry.synload.com:2005/mcbans-api:$BUILD_NUMBER
+          image:  192.169.1.19:30038/mcbans-api:$BUILD_NUMBER
           env:
             - name: KAFKA_BROKER
               valueFrom:
