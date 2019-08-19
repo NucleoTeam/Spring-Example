@@ -15,8 +15,8 @@ public class NucleoMeshService {
     this.mesh = new NucleoMesh(
       "mcbans",
       "api",
-      "192.168.1.29:2181",
-      "192.168.1.29",
+      "192.168.1.200:2181",
+      "192.168.1.200",
       9200
     );
     this.getMesh().start();
