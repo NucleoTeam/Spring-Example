@@ -22,14 +22,3 @@ spec:
       containers:
         - name: api
           image:  192.168.1.170:30038/mcbans-api:$BUILD_NUMBER
-          env:
-            - name: KAFKA_BROKER
-              valueFrom:
-                secretKeyRef:
-                  name: db
-                  key: host.txt
-            - name: db_password
-              valueFrom:
-                secretKeyRef:
-                  name: db
-                  key: password.txt
