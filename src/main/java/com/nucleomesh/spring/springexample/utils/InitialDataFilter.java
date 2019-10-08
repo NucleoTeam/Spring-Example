@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 @Component
-@Order(1)
+@Order(0)
 public class InitialDataFilter implements Filter {
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {

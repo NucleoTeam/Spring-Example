@@ -1,5 +1,6 @@
 package com.nucleomesh.spring.springexample.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synload.nucleo.event.NucleoData;
 import org.springframework.web.util.WebUtils;
 

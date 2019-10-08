@@ -52,7 +52,7 @@ public class SessionHandling {
     meshService.getMesh().call(new String[]{"session.get.continue", "session.destroy"}, data, new NucleoResponder() {
       @Override
       public void run(NucleoData data) {
-        if (!data.getObjects().containsKey("session")) {
+        if (!data.getObjects().containsKey("session") && !data.getChainBreak().isBreakChain()) {
           Cookie cookie = new Cookie("session", "");
           cookie.setMaxAge(0);
           response.addCookie(cookie);

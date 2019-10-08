@@ -10,16 +10,24 @@ import java.util.UUID;
 @Service
 public class NucleoMeshService {
   private NucleoMesh mesh;
+  public static String getEnv(String env, String default_value){
+    String temp = System.getenv(env);
+    if(temp!=null){
+      return temp;
+    }
+    return default_value;
+  }
   @PostConstruct
   public void init() {
     this.mesh = new NucleoMesh(
-      "mcbans",
-      "api",
-      "192.168.1.200:2181",
-      "192.168.1.200",
-      9200
+        getEnv("MESH_NAME", "mcbans"),
+        getEnv("SERVICE_NAME", "api"),
+        getEnv("ZOOKEEPER", "192.168.1.7:2181"),
+        getEnv("ELASTIC_HOST", "192.168.1.7"),
+        Integer.valueOf(
+            getEnv("ELASTIC_PORT", "9200")
+        )
     );
-    this.getMesh().start();
   }
   public NucleoMesh getMesh(){
     return mesh;
