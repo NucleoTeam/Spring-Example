@@ -26,7 +26,8 @@ public class NucleoMeshService {
         getEnv("ELASTIC_HOST", "192.168.1.7"),
         Integer.valueOf(
             getEnv("ELASTIC_PORT", "9200")
-        )
+        ),
+        null
     );
   }
   public NucleoMesh getMesh(){
