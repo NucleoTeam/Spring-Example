@@ -25,6 +25,34 @@ public class RootPage {
 
   Logger logger = LoggerFactory.getLogger(RootPage.class);
 
+  @GetMapping("/prev")
+  public DeferredResult<ResponseEntity<?>> getPrev(){
+    TreeMap<String, Object> data = new TreeMap<String, Object>();
+    data.put("wow", "works?");
+    DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
+    meshService.getMesh().call("popcorn.poppy", data, new NucleoResponder(){
+      @Override
+      public void run(NucleoData data) {
+        result.setResult(ResponseEntity.ok(data));
+      }
+    });
+    return result;
+  }
+
+  @GetMapping("/timeout")
+  public DeferredResult<ResponseEntity<?>> getTimeout(){
+    TreeMap<String, Object> data = new TreeMap<String, Object>();
+    data.put("wow", "works?");
+    DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
+    meshService.getMesh().call(new String[]{"information.hits","information.x"}, data, new NucleoResponder(){
+      @Override
+      public void run(NucleoData data) {
+        result.setResult(ResponseEntity.ok(data));
+      }
+    });
+    return result;
+  }
+
   @GetMapping("/")
   public DeferredResult<ResponseEntity<?>> getRoot(){
     TreeMap<String, Object> data = new TreeMap<String, Object>();
@@ -43,7 +71,7 @@ public class RootPage {
     TreeMap<String, Object> data = new TreeMap<String, Object>();
     data.put("wow", "works?");
     DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-    meshService.getMesh().call("information.changeme", data, new NucleoResponder(){
+    meshService.getMesh().call(new String[]{"information.changeme","information.popcorn.two"}, data, new NucleoResponder(){
       @Override
       public void run(NucleoData data) {
         result.setResult(ResponseEntity.ok(data));
