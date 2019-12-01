@@ -1,10 +1,9 @@
 package com.nucleomesh.spring.springexample.rest;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nucleomesh.spring.springexample.services.NucleoMeshService;
-import com.nucleomesh.spring.springexample.utils.InitialData;
-import com.synload.nucleo.event.NucleoData;
+import com.synload.nucleo.data.NucleoData;
+import com.synload.nucleo.data.NucleoObject;
 import com.synload.nucleo.event.NucleoResponder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import java.util.TreeMap;
 
 @RestController
@@ -27,8 +25,8 @@ public class RootPage {
 
     @GetMapping("/prev")
     public DeferredResult<ResponseEntity<?>> getPrev() {
-        TreeMap<String, Object> data = new TreeMap<String, Object>();
-        data.put("wow", "works?");
+        NucleoObject data = new NucleoObject();
+        data.set("wow", "works?");
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
         meshService.getMesh().call("popcorn.poppy", data, new NucleoResponder() {
             @Override
@@ -41,8 +39,8 @@ public class RootPage {
 
     @GetMapping("/timeout")
     public DeferredResult<ResponseEntity<?>> getTimeout() {
-        TreeMap<String, Object> data = new TreeMap<String, Object>();
-        data.put("wow", "works?");
+        NucleoObject data = new NucleoObject();
+        data.set("wow", "works?");
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
         meshService.getMesh().call(new String[]{"information.hits", "information.x"}, data, new NucleoResponder() {
             @Override
@@ -55,8 +53,8 @@ public class RootPage {
 
     @GetMapping("/")
     public DeferredResult<ResponseEntity<?>> getRoot() {
-        TreeMap<String, Object> data = new TreeMap<String, Object>();
-        data.put("wow", "works?");
+        NucleoObject data = new NucleoObject();
+        data.set("wow", "works?");
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
         meshService.getMesh().call("information.hits", data, new NucleoResponder() {
             @Override
@@ -69,8 +67,8 @@ public class RootPage {
 
     @GetMapping("/c")
     public DeferredResult<ResponseEntity<?>> getChange() {
-        TreeMap<String, Object> data = new TreeMap<String, Object>();
-        data.put("wow", "works?");
+        NucleoObject data = new NucleoObject();
+        data.set("wow", "works?");
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
         meshService.getMesh().call(
             new String[]{
@@ -90,8 +88,8 @@ public class RootPage {
 
     @GetMapping("/chain")
     public DeferredResult<ResponseEntity<?>> chainBreak() {
-        TreeMap<String, Object> data = new TreeMap<String, Object>();
-        data.put("stop", "chain");
+        NucleoObject data = new NucleoObject();
+        data.set("stop", "chain");
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
         meshService.getMesh().call("information.changeme", data, new NucleoResponder() {
             @Override
@@ -107,10 +105,11 @@ public class RootPage {
                                                      @RequestParam("objects") String objects,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
-        TreeMap<String, Object> data = (TreeMap<String, Object>) request.getAttribute("data");
+        NucleoObject data = (NucleoObject) request.getAttribute("data");
         try {
-            data.putAll(new ObjectMapper().readValue(objects, TreeMap.class));
-
+            new ObjectMapper().readValue(objects, Map.class).forEach((x,y)->{
+                data.set((String)x, y);
+            });
             chains = "session.get.continue,permission.admin," + chains;
             DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
             meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {

@@ -7,7 +7,7 @@ group = 'com.nucleomesh.spring.springexample'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
-String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.07.3"
+String nucleo = System.getenv("NUCLEO_VERSION") ?: "1.08.5"
 
 repositories {
 	mavenCentral()
@@ -20,6 +20,7 @@ dependencies {
 	compile("com.synload.nucleo:nucleocore:${nucleo}"){
 		exclude group: 'org.slf4j'
 	}
+	compile('com.mcbans.models:mcbans-models:1.2')
 	compile ('org.springframework.boot:spring-boot-starter-data-rest:2.2.0.M1')
 }
 ext.sharedManifest = manifest {

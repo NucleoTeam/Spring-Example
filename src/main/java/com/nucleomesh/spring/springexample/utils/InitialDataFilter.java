@@ -1,6 +1,7 @@
 package com.nucleomesh.spring.springexample.utils;
 
 
+import com.synload.nucleo.data.NucleoObject;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import javax.servlet.*;
@@ -14,7 +15,7 @@ public class InitialDataFilter implements Filter {
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
         HttpServletRequest req = (HttpServletRequest) request;
-        TreeMap<String, Object> data = InitialData.exec(req);
+        NucleoObject data = InitialData.exec(req);
         request.setAttribute("data", data);
         chain.doFilter(request, response);
     }
