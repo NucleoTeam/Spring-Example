@@ -37,7 +37,7 @@ public class SessionHandling {
         if (data.getObjects().exists("session")) {
           response.addCookie(new Cookie("session", (String) data.getObjects().get("session")));
         }
-        result.setResult(ResponseEntity.ok(data));
+        result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
       }
     });
     return result;
