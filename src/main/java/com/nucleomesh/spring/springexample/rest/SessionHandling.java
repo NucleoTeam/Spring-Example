@@ -56,7 +56,7 @@ public class SessionHandling {
           cookie.setMaxAge(0);
           response.addCookie(cookie);
         }
-        result.setResult(ResponseEntity.ok(data));
+        result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
       }
     });
     return result;
