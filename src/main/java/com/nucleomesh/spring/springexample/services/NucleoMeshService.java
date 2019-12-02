@@ -27,7 +27,7 @@ public class NucleoMeshService {
         Integer.valueOf(
             getEnv("ELASTIC_PORT", "9200")
         ),
-        "com.nucleomesh.spring"
+        null
     );
   }
   public NucleoMesh getMesh(){

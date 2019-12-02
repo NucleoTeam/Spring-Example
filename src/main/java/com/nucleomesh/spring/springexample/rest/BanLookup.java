@@ -1,6 +1,5 @@
 package com.nucleomesh.spring.springexample.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nucleomesh.spring.springexample.services.NucleoMeshService;
 import com.synload.nucleo.data.NucleoData;
 import com.synload.nucleo.data.NucleoObject;
@@ -38,7 +37,7 @@ public class BanLookup {
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
-                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects().get("playerBans")));
+                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
                 }
             });
             return result;
