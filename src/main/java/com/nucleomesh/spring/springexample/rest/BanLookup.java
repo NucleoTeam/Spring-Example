@@ -32,7 +32,7 @@ public class BanLookup {
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
         NucleoObject data = (NucleoObject) request.getAttribute("data");
-        List<Object> players = new ArrayList<Object>();
+        List<Object> players = new ArrayList<>();
         players.add(Integer.valueOf(id).intValue());
         data.set("player_list", players);
 
@@ -41,7 +41,7 @@ public class BanLookup {
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
-                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects().get("players")));
                 }
             });
             return result;
