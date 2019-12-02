@@ -16,6 +16,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("bans")
@@ -31,7 +32,10 @@ public class BanLookup {
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
         NucleoObject data = (NucleoObject) request.getAttribute("data");
-        data.set("player_list", new ArrayList(){{add(Integer.valueOf(id).intValue());}});
+        List<Object> players = new ArrayList<Object>();
+        players.add(Integer.valueOf(id).intValue());
+        data.set("player_list", players);
+
         try {
             DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
