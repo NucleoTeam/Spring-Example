@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,19 +28,14 @@ public class BanLookup {
     Logger logger = LoggerFactory.getLogger(BanLookup.class);
 
     @GetMapping("/player")
-    public DeferredResult<ResponseEntity<?>> request(@RequestParam("chains") String chains,
-                                                     @RequestParam("objects") String objects,
+    public DeferredResult<ResponseEntity<?>> request(@RequestParam("player") String player,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
         NucleoObject data = (NucleoObject) request.getAttribute("data");
+        data.set("player_list", new ArrayList(){{add(Integer.valueOf(player).longValue());}});
         try {
-            new ObjectMapper().readValue(objects, Map.class).forEach((x, y)->{
-                data.set((String)x, y);
-            });
-
-            chains = "session.get.continue,permission.admin," + chains;
             DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-            meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
+            meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
                     result.setResult(ResponseEntity.ok(data));
