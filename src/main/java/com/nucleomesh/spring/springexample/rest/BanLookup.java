@@ -27,7 +27,7 @@ public class BanLookup {
     Logger logger = LoggerFactory.getLogger(BanLookup.class);
 
     @GetMapping("/player")
-    public DeferredResult<ResponseEntity<?>> request(@RequestParam("id") String id,
+    public DeferredResult<ResponseEntity<?>> request(@RequestParam String id,
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
         NucleoObject data = (NucleoObject) request.getAttribute("data");
@@ -37,7 +37,7 @@ public class BanLookup {
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
-                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+                    result.setResult(ResponseEntity.ok(data));
                 }
             });
             return result;
