@@ -41,7 +41,7 @@ public class BanLookup {
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
-                    result.setResult(ResponseEntity.ok(data));
+                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
                 }
             });
             return result;
