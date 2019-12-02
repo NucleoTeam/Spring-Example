@@ -38,7 +38,7 @@ public class BanLookup {
 
         try {
             DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-            meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
+            meshService.getMesh().call(new String[]{"player.get.playerid"}, data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
                     result.setResult(ResponseEntity.ok(data.getObjects().getObjects().get("players")));
