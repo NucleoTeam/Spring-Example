@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-@RestController("/bans")
+@RestController("bans")
 public class BanLookup {
 
     @Autowired
