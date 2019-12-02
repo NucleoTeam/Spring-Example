@@ -32,7 +32,7 @@ public class BanLookup {
                                                      HttpServletRequest request,
                                                      HttpServletResponse response) {
         NucleoObject data = (NucleoObject) request.getAttribute("data");
-        data.set("player_list", new ArrayList(){{add(Integer.valueOf(id).longValue());}});
+        data.set("player_list", new ArrayList(){{add(Integer.valueOf(id).intValue());}});
         try {
             DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
             meshService.getMesh().call(new String[]{"player.get.playerid","ban.get.player"}, data, new NucleoResponder() {
