@@ -35,7 +35,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: JAVA_OPTS
-                value: "-Xms2g -Xmx5g"
+              value: "-Xms2g -Xmx5g"
             - name: MESH_NAME
               value: "mcbprod"
             - name: KAFKA_BROKER
