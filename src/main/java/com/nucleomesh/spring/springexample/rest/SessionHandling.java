@@ -37,7 +37,8 @@ public class SessionHandling {
         if (data.getObjects().exists("session")) {
           response.addCookie(new Cookie("session", (String) data.getObjects().get("session")));
         }
-        result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+        //result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+        result.setResult(ResponseEntity.ok(data));
       }
     });
     return result;
@@ -56,7 +57,8 @@ public class SessionHandling {
           cookie.setMaxAge(0);
           response.addCookie(cookie);
         }
-        result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+        //result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+        result.setResult(ResponseEntity.ok(data));
       }
     });
     return result;

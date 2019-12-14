@@ -115,7 +115,8 @@ public class RootPage {
             meshService.getMesh().call(chains.split(","), data, new NucleoResponder() {
                 @Override
                 public void run(NucleoData data) {
-                    result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+                    //result.setResult(ResponseEntity.ok(data.getObjects().getObjects()));
+                    result.setResult(ResponseEntity.ok(data));
                 }
             });
             return result;
