@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image:  192.168.1.170:30038/mcbans-api:$BUILD_NUMBER
+          image:  192.168.1.90:8888/mcbans-api:$BUILD_NUMBER
           resources:
             requests:
               memory: "2Gi"
@@ -39,4 +39,4 @@ spec:
             - name: MESH_NAME
               value: "mcbprod"
             - name: KAFKA_BROKER
-              value: "192.168.1.7:9092,192.168.1.6:9092"
+              value: "192.168.88.146:9092,192.168.88.147:9092,192.168.88.145:9092"
